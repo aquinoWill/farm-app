@@ -85,6 +85,7 @@ export function InputSearch() {
             {filterFarms.map((item, index) => (
               <ListItemButton
                 key={index}
+                data-testid="farm-item"
                 onClick={() => {
                   setQuery(item.farmName);
                   setSearchTerm(item.farmName);

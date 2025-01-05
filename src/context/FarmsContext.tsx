@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { type RegistryFormTypes } from "@/hooks";
 
-const initialState: FarmsContextProps = {
+export const initialState: FarmsContextProps = {
   farms: [],
   filterFarms: [],
   setFarms: () => {},

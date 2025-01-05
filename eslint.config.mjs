@@ -10,6 +10,16 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    overrides: [
+      {
+        "files": ["src/**/*"],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
