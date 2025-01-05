@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { AlertsProvider, QueryClientProviders } from "@/context";
+import { Box, Breadcrumbs, Container, Link } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { Roboto } from "next/font/google";
+import CssBaseline from "@mui/material/CssBaseline";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import theme from "@/themes/theme";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const roboto = Roboto({ weight: "400", style: "normal", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,10 +20,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+    <html lang="pt_br">
+      <body className={roboto.className}>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <QueryClientProviders>
+              <CssBaseline />
+              <AlertsProvider>
+                <Container maxWidth="xl" sx={{ mt: 4 }} component={"main"}>
+                  <Box sx={{ mb: 4 }} component={"section"}>
+                    <Breadcrumbs aria-label="breadcrumb">
+                      <Link underline="hover" color="inherit" href="/">
+                        Home
+                      </Link>
+                      <Link
+                        underline="hover"
+                        color="inherit"
+                        href="/create-farm"
+                      >
+                        Registry Farm
+                      </Link>
+                    </Breadcrumbs>
+                  </Box>
+                </Container>
+                <Box sx={{ mb: 4 }} component={"section"}>
+                  {children}
+                </Box>
+              </AlertsProvider>
+            </QueryClientProviders>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
