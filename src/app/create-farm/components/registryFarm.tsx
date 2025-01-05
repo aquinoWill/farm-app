@@ -25,6 +25,7 @@ import {
   FormHelperText,
   FormControlLabel,
 } from "@mui/material";
+import Grid from '@mui/material/Grid2';
 
 type FormTypes = {
   id: string;
@@ -87,35 +88,44 @@ export const RegistryFarm = () => {
       <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
         <FormLabel component="legend">Assign responsibility</FormLabel>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="id"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Farm Id"
-                helperText={errors.id?.message}
-                error={Boolean(errors.id)}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name="farmName"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Farm Name"
-                helperText={errors.farmName?.message}
-                error={Boolean(errors.farmName)}
-                {...field}
-              />
-            )}
-          />
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid size={6}>
+            <Controller
+              name="id"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Farm Id"
+                  helperText={errors.id?.message}
+                  error={Boolean(errors.id)}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={6}>
+            <Controller
+              name="farmName"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Farm Name"
+                  helperText={errors.farmName?.message}
+                  error={Boolean(errors.farmName)}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={6}>
           <Controller
             name="landArea"
             control={control}
             render={({ field }) => (
               <TextField
+                fullWidth
                 label="Land Area"
                 type="number"
                 InputProps={{ inputProps: { min: 0 } }}
@@ -125,31 +135,38 @@ export const RegistryFarm = () => {
               />
             )}
           />
-          <Controller
-            name="landUnit"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Land Unit"
-                helperText={errors.landUnit?.message}
-                error={Boolean(errors.landUnit)}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name="address"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                label="Address"
-                helperText={errors.address?.message}
-                error={Boolean(errors.address)}
-                {...field}
-              />
-            )}
-          />
-          <Box>
+          </Grid>
+          <Grid size={6}>
+            <Controller
+              name="landUnit"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Land Unit"
+                  helperText={errors.landUnit?.message}
+                  error={Boolean(errors.landUnit)}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={6}>
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  label="Address"
+                  helperText={errors.address?.message}
+                  error={Boolean(errors.address)}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
+          <Grid size={12}>
             {fields.map((field, index) => (
               <Box key={index} sx={{ maxWidth: 345 }}>
                 <FormControl fullWidth>
@@ -161,10 +178,11 @@ export const RegistryFarm = () => {
                     name={`cropProductions.${index}.cropTypeId`}
                     render={({ field }) => (
                       <Select
-                        {...field}
                         label="Crops"
                         labelId={`cropProductions.${index}.cropTypeId`}
                         id={`cropProductions.${index}.cropTypeId`}
+                        sx={{ width: "100%" }}
+                        {...field}
                         {...register(`cropProductions.${index}.cropTypeId`)}
                       >
                         {dataCrops?.map((crop: CropTypes) => (
@@ -182,34 +200,36 @@ export const RegistryFarm = () => {
                     </FormHelperText>
                   )}
                 </FormControl>
-                <FormControl fullWidth>
-                  <FormControlLabel
-                    label="Irriagated"
-                    control={
-                      <Controller
-                        name={`cropProductions.${index}.isIrrigated`}
-                        control={control}
-                        render={({ field }) => (
-                          <Checkbox {...field} checked={field.value} />
-                        )}
-                      />
-                    }
-                  />
-                </FormControl>
-                <FormControl fullWidth>
-                  <FormControlLabel
-                    label="Insured"
-                    control={
-                      <Controller
-                        name={`cropProductions.${index}.isInsured`}
-                        control={control}
-                        render={({ field }) => (
-                          <Checkbox {...field} checked={field.value} />
-                        )}
-                      />
-                    }
-                  />
-                </FormControl>
+                <Box sx={{ display: "flex", gap: 2, flexDirection: "row" }}>
+                  <FormControl fullWidth>
+                    <FormControlLabel
+                      label="Irriagated"
+                      control={
+                        <Controller
+                          name={`cropProductions.${index}.isIrrigated`}
+                          control={control}
+                          render={({ field }) => (
+                            <Checkbox {...field} checked={field.value} />
+                          )}
+                        />
+                      }
+                    />
+                  </FormControl>
+                  <FormControl fullWidth>
+                    <FormControlLabel
+                      label="Insured"
+                      control={
+                        <Controller
+                          name={`cropProductions.${index}.isInsured`}
+                          control={control}
+                          render={({ field }) => (
+                            <Checkbox {...field} checked={field.value} />
+                          )}
+                        />
+                      }
+                    />
+                  </FormControl>
+                </Box>
 
                 <Button
                   size="small"
@@ -230,8 +250,9 @@ export const RegistryFarm = () => {
                 )}
               </Box>
             ))}
-          </Box>
-          <Button type="submit">Submit</Button>
+          </Grid>
+        </Grid>
+        <Button type="submit">Submit</Button>
         </form>
       </FormControl>
     </Box>
