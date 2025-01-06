@@ -1,9 +1,9 @@
 export type RegistryFormTypes = {
   id: string;
-  farmName?: string;
+  farmName?: string | undefined;
   landArea: number;
   landUnit: string;
-  address?: string;
+  address?: string | undefined;
   cropProductions: { cropTypeId: number; isIrrigated?: boolean }[];
 };
 

@@ -18,11 +18,11 @@ export function ListFarms() {
     if (isSuccess) {
       showAlert('Farm deleted successfully', 'success');
     }
-  }, [dataFarms, setFarms, isSuccess]);
+  }, [dataFarms, setFarms]);
 
   const MAX_ITEM = 10;
   const MAX_PAGE = Math.ceil(farms?.length / 10);
-  const filterData = filterFarms.length > 0 ? filterFarms : farms;
+  const filterData = filterFarms?.length > 0 ? filterFarms : farms;
 
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,

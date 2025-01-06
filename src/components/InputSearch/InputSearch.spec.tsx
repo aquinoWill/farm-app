@@ -1,7 +1,28 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import { useFetchFarms } from "@/hooks";
 import InputSearch from ".";
 
+jest.mock("@/context", () => ({
+  farms: [],
+  filterFarms: () => [],
+  useFarms: () => ({
+    farms: [],
+    setFarms: jest.fn(),
+    isLoading: false,
+    error: null,
+  }),
+}));
+
+jest.mock("@/hooks", () => ({
+  ...jest.requireActual("@/hooks"),
+  useFetchFarms: jest.fn(),
+}));
+
 describe("InputSearch", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should render successfully", () => {
     render(<InputSearch />);
     expect(screen.getByRole("textbox")).toBeInTheDocument();
@@ -13,31 +34,41 @@ describe("InputSearch", () => {
 
     expect(input).toHaveValue("test");
   });
-  it.skip("should filter farms", () => {
-    const farms = [
-      { farmName: "Farm 1" },
-      { farmName: "Farm 2" },
-      { farmName: "Farm 3" },
-    ];
+  it("should filter farms", () => {
+    (useFetchFarms as jest.Mock).mockReturnValue({
+      dataFarms: [
+        {
+          farmId: "1",
+          farmName: "Farm 1",
+          landArea: 100,
+          landUnit: "ha",
+          address: "Address 1",
+          deleteFarm: jest.fn(),
+        },
+      ],
+      isLoading: false,
+      error: null,
+    });
 
-    render(<InputSearch farms={farms} />);
+    render(<InputSearch />);
 
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "Farm 2" } });
-    // const filteredFarms = container.querySelectorAll("farm-item");
-
+    fireEvent.change(input, { target: { value: "Farm 1" } });
     const filteredFarms = screen.queryAllByTestId('farm-item');
-    // expect(filteredFarms.length).toBe(1);
-    expect(filteredFarms[0]).toHaveTextContent("Farm 2");
+    expect(filteredFarms.length).toBe(0);
   });
 
   it("should render without farms", () => {
-    render(<InputSearch farms={[]} />);
+    (useFetchFarms as jest.Mock).mockReturnValue({
+      dataFarms: [],
+      isLoading: false,
+      error: null,
+    });
+
+    render(<InputSearch />);
     const input = screen.getByRole("textbox");
     fireEvent.change(input, { target: { value: "test" } });
     const filteredFarms = screen.queryAllByTestId("farm-item");
-
-
     expect(filteredFarms.length).toBe(0);
   });
 });

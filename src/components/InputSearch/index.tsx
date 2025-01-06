@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useFarms } from "@/context/FarmsContext";
+import { RegistryFormTypes } from "@/hooks";
 
 export function InputSearch() {
   const [query, setQuery] = useState<string>("");
@@ -20,8 +21,8 @@ export function InputSearch() {
   const { farms, filterFarms, setFilterFarms } = useFarms();
 
   const handleFilterFarms = (query: string) => {
-    const data = farms.filter((item) =>
-      item.farmName.toLowerCase().includes(query.toLowerCase())
+    const data = farms.filter((item: RegistryFormTypes) =>
+      item.farmName?.toLowerCase().includes(query.toLowerCase())
     );
     setFilterFarms(data);
   };
@@ -82,7 +83,7 @@ export function InputSearch() {
               mt: 0.2,
             }}
           >
-            {filterFarms.map((item, index) => (
+            {filterFarms.map((item: RegistryFormTypes, index: number) => (
               <ListItemButton
                 key={index}
                 data-testid="farm-item"

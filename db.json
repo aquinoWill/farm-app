@@ -29,20 +29,6 @@
       "farmName": "Farm2"
     },
     {
-      "id": "3",
-      "cropProductions": [
-        {
-          "isInsured": true,
-          "isIrrigated": false,
-          "cropTypeId": 3
-        }
-      ],
-      "address": "sdasdsa dsd",
-      "landUnit": "89",
-      "landArea": 0,
-      "farmName": "Farm3"
-    },
-    {
       "id": "4",
       "cropProductions": [
         {
@@ -183,20 +169,6 @@
       "farmName": "Farm16"
     },
     {
-      "id": "21",
-      "cropProductions": [
-        {
-          "isInsured": true,
-          "isIrrigated": true,
-          "cropTypeId": 2
-        }
-      ],
-      "address": "qwqw weqweqw",
-      "landUnit": "1212",
-      "landArea": 12,
-      "farmName": "Farm21"
-    },
-    {
       "id": "22",
       "cropProductions": [
         {
@@ -293,6 +265,20 @@
       "landUnit": "123",
       "landArea": 12,
       "farmName": "Farm40"
+    },
+    {
+      "id": "100",
+      "cropProductions": [
+        {
+          "isInsured": true,
+          "isIrrigated": true,
+          "cropTypeId": 3
+        }
+      ],
+      "address": "sdf sdfsdfsd",
+      "landUnit": "324",
+      "landArea": 324,
+      "farmName": "Farm100"
     }
   ],
   "crop-types": [
