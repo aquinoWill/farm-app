@@ -21,6 +21,16 @@ npm run dev
 
 ```
 
+
+#### Run the tests:
+
+```bash
+pnpm test
+#or
+npm run test
+
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Technology Stack
